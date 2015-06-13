@@ -13,6 +13,11 @@
  * Text Domain:       wc-sort-by-stock
  */
 
+/** Die if accessed directly
+*/
+
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
 /* Thanks to Rachel Carden for original code on making WordPress admin columns sortable
 * http://wpdreamer.com/2014/04/how-to-make-your-wordpress-admin-columns-sortable/
 */
