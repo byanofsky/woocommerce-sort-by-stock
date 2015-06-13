@@ -3,7 +3,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       WooCommerce Sort By Stock
- * Plugin URI:        http://www.mywpexpert.com/plugins/wc-sort-by-stock
+ * Plugin URI:        https://github.com/byanofsky/wc-sort-by-stock
  * Description:       Sort your WooCommerce products by the stock amount on the WooCommerce product dashboard page.
  * Version:           1.0.0
  * Author:            Brandon Yanofsky
