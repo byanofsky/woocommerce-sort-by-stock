@@ -59,11 +59,6 @@ The `assets` directory contains three files.
 2. `icon-256x256.png` is a used to represent the plugin’s icon image (which is new as of WordPress 4.0).
 3. `screenshot-1.png` is used to represent a single screenshot of the plugin that corresponds to the “Screenshots” heading in your plugin `README.txt`.
 
-The WordPress Plugin Repository directory structure contains three directories:
-
-1. `assets`
-2. `trunk`
-
 # Credits
 
 WooCommerce Sort By Stock by [Brandon Yanofsky](http://twitter.com/byanofsky/).
