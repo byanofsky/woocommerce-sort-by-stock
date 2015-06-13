@@ -45,10 +45,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * The very first version
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 This is the very first version.
