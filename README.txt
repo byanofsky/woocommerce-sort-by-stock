@@ -1,7 +1,7 @@
 === WooCommerce Sort By Stock ===
 Contributors: byanofsky
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, inventory, stock, sales, sort by stock
-Requires at least: 3.3
+Requires at least: 3.5
 Tested up to: 4.2.2
 Stable tag: 1.0.0
 License: GPLv2 or later
