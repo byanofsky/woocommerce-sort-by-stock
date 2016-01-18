@@ -4,9 +4,9 @@ Sort your WooCommerce products by the stock amount on the WooCommerce product da
 
 ## Descriptions
 
-WooCommerce Sort By Stockis a relatively simple plugin. It does one thing and one thing only: allows you to sort by stock amount in WooCommerce.
+WooCommerce Sort By Stock is a relatively simple plugin. It does one thing and one thing only: allows you to sort by stock amount in WooCommerce.
 
-Upon activation of this plugin, your WooCommerce product dashboard page will allow you to sort product by the amount of stock remaining. Simply click on the `Stock` admin column.
+Upon activation of this plugin, you will be able to sort products by the amount of stock remaining on your WooCommerce product dashboard page. Simply click on the `Stock` admin column to arrange by ascending or descending.
 
 If sorting in ascending order, out of stock items will be shown first, followed by in stock but inventory not managed (no stock amount number), and finally showing in stock items which have a stock amount number, starting with 1 and increasing.
 
@@ -23,13 +23,13 @@ WooCommerce Sort By Stock includes the following files:
 
 ## Installation
 
-WooCommerce Sort By Stock can be installed in one of two ways both of which are documented below. Note that because of its directory structure, the Boilerplate cannot be installed “as-is.”
+WooCommerce Sort By Stock can be installed in one of two ways both of which are documented below.
 
 Instead, the options are:
 
 1. Upload the `wc-sort-by-stock` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the `Plugins` menu in WordPress
-3. There are no options. Just go to the Products dashboard page, click the `Stock` column header, and you will be able to sort by the amount of stock
+3. There are no options. Just go to the WooCommerce Products dashboard page, click the `Stock` column header, and you will be able to sort by the amount of stock
 
 ## License
 
