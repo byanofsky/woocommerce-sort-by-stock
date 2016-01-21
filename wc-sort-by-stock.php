@@ -34,6 +34,28 @@ function wcss_make_stock_sortable( $sortable_columns ) {
 }
 
 /**
+ * Alter different parts of the query
+ * 
+ * @param array $pieces
+ * 
+ * @return array $pieces
+ */
+function intercept_query_clauses( $pieces )
+{
+  echo '<style>#post-clauses-dump { display: block; background-color: #777; color: #fff; white-space: pre-line; }</style>';
+  // >>>> Inspect & Debug the Query 
+  // NEVER EVER show this to anyone other than an admin user - unless you're in your local installation
+  if ( current_user_can( 'manage_options' ) )
+  {
+    $dump = var_export( $pieces, true );
+    echo "< PRE id='post-clauses-dump'>{$dump}</ PRE >";
+  }
+
+  return $pieces;
+}
+add_filter( 'posts_clauses', 'intercept_query_clauses', 20, 1 );
+
+/**
 * Adjust the order of the posts as they are output on the backend
 */
 add_filter( 'posts_clauses', 'wcss_manage_wp_posts_be_qe_posts_clauses', 1, 2 );
@@ -71,7 +93,7 @@ function wcss_manage_wp_posts_be_qe_posts_clauses( $pieces, $query ) {
     }
 
     //Specify orderby. Orderby stock status first in reverse order, then stock amount.
-    $pieces[ 'orderby' ] = "wp_stock_status.meta_value $in_stock_order, wp_stock.meta_value $order, " . $pieces[ 'orderby' ];
+    $pieces[ 'orderby' ] = "wp_stock_status.meta_value $in_stock_order, wp_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
 	
     }
 
