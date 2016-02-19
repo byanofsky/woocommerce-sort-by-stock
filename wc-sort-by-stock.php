@@ -61,7 +61,7 @@ function wcss_manage_wp_posts_be_qe_posts_clauses( $pieces, $query ) {
     /**
     * Join postmeta to include stock_status and stock info
     */
-    $pieces[ 'join' ] .= " LEFT JOIN $wpdb->postmeta {$wpdb->prefix}stock_status ON {$wpdb->prefix}stock_status.post_id = {$wpdb->posts}.ID AND {$wpdb->prefix}stock_status.meta_key = '_stock_status' LEFT JOIN $wpdb->postmeta {$wpdb->prefix}stock ON {$wpdb->prefix}stock.post_id = {$wpdb->posts}.ID AND {$wpdb->prefix}stock.meta_key = '_stock'";
+    $pieces[ 'join' ] .= "LEFT JOIN $wpdb->postmeta wc_stock_status ON $wpdb->posts.ID = wc_stock_status.post_id AND wc_stock_status.meta_key = '_stock_status' LEFT JOIN $wpdb->postmeta wc_stock ON $wpdb->posts.ID = wc_stock.post_id AND wc_stock.meta_key = '_stock'";
 
     //Set reverse order in a variable
     if($order == 'ASC') {
@@ -71,9 +71,11 @@ function wcss_manage_wp_posts_be_qe_posts_clauses( $pieces, $query ) {
     }
 
     //Specify orderby. Orderby stock status first in reverse order, then stock amount.
-    $pieces[ 'orderby' ] = "{$wpdb->prefix}stock_status.meta_value $in_stock_order, {$wpdb->prefix}stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
+    $pieces[ 'orderby' ] = "wc_stock_status.meta_value $in_stock_order, wc_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
 	
     }
+
+    $pieces[ 'groupby' ] = "{$wpdb->posts}.ID";
 
     return $pieces;
 
