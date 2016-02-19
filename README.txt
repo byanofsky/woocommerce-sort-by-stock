@@ -2,8 +2,8 @@
 Contributors: byanofsky
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, inventory, stock, sales, sort by stock
 Requires at least: 3.5
-Tested up to: 4.4.1
-Stable tag: 2.0.0
+Tested up to: 4.4.2
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,10 @@ No. This plugin only allows you to sort by stock amount on the dashboard (backen
 
 == Changelog ==
 
+= 2.1.0 =
+* Added fix to allow plugin to work on sites with changed database prefixes from the default
+* Added GROUPBY parameter to query to prevent duplicate product listings
+
 = 2.0.0 =
 * Fixed an issue where products were ordered incorrectly by stock amount.
 
@@ -48,6 +52,9 @@ No. This plugin only allows you to sort by stock amount on the dashboard (backen
 * The very first version
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+This version fixes a major error that prevented the plugin from working on sites with database prefixes that weren't wp_.
 
 = 2.0.0 =
 This version fixes a major error in how products were ordered incorrectly.
