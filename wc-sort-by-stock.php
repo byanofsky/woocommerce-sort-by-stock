@@ -82,7 +82,8 @@ function wcss_manage_wp_posts_be_qe_posts_clauses( $pieces, $query ) {
 	    }
 
 	    //Specify orderby. Orderby stock status first in reverse order, then stock amount.
-	    $pieces[ 'orderby' ] = "wc_stock_status.meta_value $in_stock_order, wc_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
+	    $pieces[ 'orderby' ] = "wc_stock_status.meta_value $in_stock_order, " . 
+	    	"wc_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
 	
     }
 
