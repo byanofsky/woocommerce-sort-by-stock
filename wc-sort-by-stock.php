@@ -5,7 +5,7 @@
  * Plugin Name:       WooCommerce Sort By Stock
  * Plugin URI:        https://github.com/byanofsky/wc-sort-by-stock
  * Description:       Sort your WooCommerce products by the stock amount on the WooCommerce product dashboard page.
- * Version:           2.1.0
+ * Version:           2.2.0
  * Author:            Brandon Yanofsky
  * Author URI:        http://www.mywpexpert.com/
  * License:           GPL-2.0
@@ -38,40 +38,52 @@ function wcss_make_stock_sortable( $sortable_columns ) {
 */
 add_filter( 'posts_clauses', 'wcss_manage_wp_posts_be_qe_posts_clauses', 1, 2 );
 function wcss_manage_wp_posts_be_qe_posts_clauses( $pieces, $query ) {
-  global $wpdb;
+	global $wpdb;
 
-  /** 
-  * Set variable for what is specified to orderby
-  */ 
-  $orderby = $query->get( 'orderby' );
+	/** 
+	* Set variable for what is specified to orderby
+	*/ 
+	$orderby = $query->get( 'orderby' );
 
-  /**
-  * Check for main query and if orderby is specified
-  */
-  if ( $query->is_main_query() && ( $query->get( 'orderby' ) == '_stock' ) ) {
+	/**
+	* Check for main query and if orderby is specified
+	*/
+	if ( $query->is_main_query() && ( $query->get( 'orderby' ) == '_stock' ) ) {
 
-    // Get the order query variable - ASC or DESC
-    $order = strtoupper( $query->get( 'order' ) );
+	    // Get the order query variable - ASC or DESC
+	    $order = strtoupper( $query->get( 'order' ) );
 
-    // Make sure the order setting qualifies. If not, set default as ASC
-    if ( ! in_array( $order, array( 'ASC', 'DESC' ) ) )
-      $order = 'ASC';
-        
-  		
-    /**
-    * Join postmeta to include stock_status and stock info
-    */
-    $pieces[ 'join' ] .= "LEFT JOIN $wpdb->postmeta wc_stock_status ON $wpdb->posts.ID = wc_stock_status.post_id AND wc_stock_status.meta_key = '_stock_status' LEFT JOIN $wpdb->postmeta wc_stock ON $wpdb->posts.ID = wc_stock.post_id AND wc_stock.meta_key = '_stock'";
+	    // Make sure the order setting qualifies. If not, set default as ASC
+	    if ( ! in_array( $order, array( 'ASC', 'DESC' ) ) )
+	      $order = 'ASC';
+	        
+	  		
+	    /**
+	    * Join postmeta to include stock_status and stock info
+	    */
+		$pieces[ 'join' ] .= $wpdb->prepare(
+			"
+			LEFT JOIN $wpdb->postmeta wc_stock_status
+			ON $wpdb->posts.ID = wc_stock_status.post_id
+			AND wc_stock_status.meta_key = %s
+			LEFT JOIN $wpdb->postmeta wc_stock
+			ON $wpdb->posts.ID = wc_stock.post_id
+			AND wc_stock.meta_key = %s
+			",
+			'_stock_status',
+			'_stock'
+		);
 
-    //Set reverse order in a variable
-    if($order == 'ASC') {
-      $in_stock_order = 'DESC';
-    } else {
-      $in_stock_order = 'ASC';
-    }
+	    //Set reverse order in a variable
+	    if($order == 'ASC') {
+	      $in_stock_order = 'DESC';
+	    } else {
+	      $in_stock_order = 'ASC';
+	    }
 
-    //Specify orderby. Orderby stock status first in reverse order, then stock amount.
-    $pieces[ 'orderby' ] = "wc_stock_status.meta_value $in_stock_order, wc_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
+	    //Specify orderby. Orderby stock status first in reverse order, then stock amount.
+	    $pieces[ 'orderby' ] = "wc_stock_status.meta_value $in_stock_order, " . 
+	    	"wc_stock.meta_value * 1 $order, " . $pieces[ 'orderby' ];
 	
     }
 
